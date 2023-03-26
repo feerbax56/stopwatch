@@ -1,7 +1,7 @@
 <template>
 
 
-  <div class="counterBlock" :class="{activeCounter: timerState==='running'}">
+  <div class="counterBlock" :class="{activeCounter: timerState==='running'}" :key="$props.id">
     <div class="timerBlock">{{ formattedTime }}</div>
     <div class="btnBlock">
       <button v-on:click="pauseTimer(), showStart()" v-if="!show" class="btnStyleNone">
@@ -36,6 +36,7 @@
 
 export default {
   name: 'CounterStopwatch',
+  props: ['id'],
   data() {
     return {
       currentTime: 0,
@@ -121,12 +122,12 @@ export default {
   line-height: 21px;
   text-align: center;
   margin: 0 auto;
-  padding: 22px;
+  padding: 19px;
   border-bottom: 1px solid #9E9E9E;
 }
 
 .btnBlock {
-  padding: 20px;
+  padding: 16px;
   display: flex;
   align-content: center;
   justify-content: center;

@@ -1,7 +1,10 @@
 <template>
   <div class="mainBlock">
-    <CounterStopwatch />
-    <AddCounter/>
+    <div v-for="counter in counters" :key="counter.id">
+      <CounterStopwatch :key="counter.id"/>
+    </div>
+
+    <AddCounter @addCounter="addCounter"/>
   </div>
 
 </template>
@@ -17,11 +20,13 @@ export default {
   },
   data(){
     return{
-      items: []
+      counters: [{id: 1},],
     }
   },
   methods: {
     addCounter(){
+      let id = Math.random()
+      this.counters.push({id})
     }
   }
 }
