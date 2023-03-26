@@ -2,9 +2,10 @@
 
 
   <div class="stopwatch">
-    <div>{{ currentTime }}</div>
+    <div>{{ formattedTime }}</div>
     <div>
-      <button v-on:click="startTimer">start/pausa</button>
+      <button v-on:click="startTimer">start</button>
+      <button v-on:click="pauseTimer">pause</button>
       <button v-on:click="stopTimer">stop</button>
     </div>
   </div>
@@ -15,28 +16,46 @@
 export default {
   name: 'CounterStopwatch',
   data() {
-    return{
+    return {
       currentTime: 0,
-      timer: null,
+      formattedTime: "00:00:00",
+      timerState: 'stopped',
+      timer: undefined,
     }
   },
- methods: {
+  methods: {
     startTimer() {
-      this.timer = setInterval(() => {
-        this.currentTime++
-      }, 1000)
+      if (this.timerState !== 'running') {
+        this.tick();
+        this.timerState = 'running';
+      }
+    },
+    pauseTimer() {
+      this.timerState = 'paused'
+      window.clearInterval(this.timer)
     },
     stopTimer() {
-      clearTimeout(this.timer)
+      window.clearInterval(this.timer)
+      this.currentTime = 0
+      this.formattedTime = "00:00:00"
+      this.timerState = 'stopped'
     },
-  },
-  watch: {
-    currentTime(time) {
-      if (time === 0) {
-        this.stopTimer()
-      }
-    }
-  },
+    tick() {
+      this.timer = setInterval(() => {
+        this.currentTime++
+        this.formattedTime = this.formatTime(this.currentTime)
+      }, 1000)
+    },
+    formatTime(seconds) {
+      let createdTime = new Date(null)
+
+      createdTime.setSeconds(seconds)
+      // время перегоняется в строку и вырезается лишнее
+      let fullTime = createdTime.toISOString().substring(19, 11)
+      // console.log(fullTime)
+      return fullTime
+    },
+  }
 }
 </script>
 
