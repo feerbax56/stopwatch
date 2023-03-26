@@ -1,7 +1,7 @@
 <template>
 
 
-  <div class="stopwatch">
+  <div class="counterBlock" :class="{activeCounter: timerState==='running'}">
     <div class="timerBlock">{{ formattedTime }}</div>
     <div class="btnBlock">
       <button v-on:click="pauseTimer(), showStart()" v-if="!show" class="btnStyleNone">
@@ -96,7 +96,7 @@ export default {
 </script>
 
 <style>
-.stopwatch {
+.counterBlock {
   width: 225px;
   height: 120px;
   background-color: #696969;
@@ -125,11 +125,18 @@ export default {
   border-bottom: 1px solid #9E9E9E;
 }
 
-.btnBlock{
+.btnBlock {
   padding: 20px;
   display: flex;
   align-content: center;
   justify-content: center;
   gap: 50px;
+}
+
+.activeCounter {
+  width: 225px;
+  height: 120px;
+  background-color: #696969;
+  color: white;
 }
 </style>

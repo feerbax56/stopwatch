@@ -1,27 +1,28 @@
 <template>
   <div class="mainBlock">
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
-    <CounterStopwatch/>
+    <CounterStopwatch />
+    <AddCounter/>
   </div>
 
 </template>
 
 <script>
 import CounterStopwatch from './components/Counter.vue'
-
+import AddCounter from './components/AddCounter.vue'
 export default {
   name: 'App',
   components: {
-    CounterStopwatch
+    CounterStopwatch,
+    AddCounter,
+  },
+  data(){
+    return{
+      items: []
+    }
+  },
+  methods: {
+    addCounter(){
+    }
   }
 }
 </script>
