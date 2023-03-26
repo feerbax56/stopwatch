@@ -4,6 +4,7 @@
 
 <script>
 import CounterStopwatch from './components/Counter.vue'
+
 export default {
   name: 'App',
   components: {
@@ -14,7 +15,6 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -22,7 +22,13 @@ export default {
   margin-top: 60px;
   background-color: #353638;
 }
-body{
+
+@font-face {
+  font-family: 'Gotham';
+  src: local('Gotham'), url("../src/assets/fonts/gothampro.ttf") format("truetype");
+}
+
+body {
   background-color: #353638;
 }
 

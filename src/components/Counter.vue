@@ -2,11 +2,32 @@
 
 
   <div class="stopwatch">
-    <div>{{ formattedTime }}</div>
+    <div class="timerBlock">{{ formattedTime }}</div>
     <div>
-      <button v-on:click="pauseTimer(), showStart()" v-if="!show">pause</button>
-      <button v-on:click="startTimer(), showPaused()" v-if="show" class="btnStart">start</button>
-      <button v-on:click="stopTimer(),  showStart()" :disabled="timerState === 'stopped'">stop</button>
+      <button v-on:click="pauseTimer(), showStart()" v-if="!show" class="btnStyleNone">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" fill="currentColor" class="bi bi-pause"
+             viewBox="0 0 16 16">
+          <path
+              d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+
+      </button>
+      <button v-on:click="startTimer(), showPaused()" v-if="show" class="btnStyleNone">
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" fill="currentColor" class="bi bi-play-fill"
+             viewBox="0 0 16 16">
+          <path
+              d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+        </svg>
+
+      </button>
+      <button v-on:click="stopTimer(),  showStart()" :disabled="timerState === 'stopped'" class="btnStyleNone">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-stop-fill"
+             viewBox="0 0 16 16">
+          <path
+              d="M5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5A1.5 1.5 0 0 1 5 3.5z"/>
+        </svg>
+
+      </button>
     </div>
   </div>
 </template>
@@ -81,7 +102,24 @@ export default {
   color: #9E9E9E;
 }
 
-.btnStart {
-  background-image: url("../src/assets/icons/play.svg");
+.btnStyleNone {
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.timerBlock {
+  font-family: 'Gotham Pro', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 21px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 22px;
+  border-bottom: 1px solid #9E9E9E;
 }
 </style>
