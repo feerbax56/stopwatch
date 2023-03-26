@@ -4,9 +4,9 @@
   <div class="stopwatch">
     <div>{{ formattedTime }}</div>
     <div>
-      <button v-on:click="startTimer">start</button>
+      <button v-on:click="startTimer" :disabled="timerState === 'running'">start</button>
       <button v-on:click="pauseTimer">pause</button>
-      <button v-on:click="stopTimer">stop</button>
+      <button v-on:click="stopTimer" :disabled="timerState === 'stopped'">stop</button>
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       currentTime: 0,
-      formattedTime: "00:00:00",
+      formattedTime: "0",
       timerState: 'stopped',
       timer: undefined,
     }
@@ -37,7 +37,7 @@ export default {
     stopTimer() {
       window.clearInterval(this.timer)
       this.currentTime = 0
-      this.formattedTime = "00:00:00"
+      this.formattedTime = "0"
       this.timerState = 'stopped'
     },
     tick() {
@@ -48,12 +48,19 @@ export default {
     },
     formatTime(seconds) {
       let createdTime = new Date(null)
-
       createdTime.setSeconds(seconds)
+      // количество знаков в зависимости от наличия минут и часовых значений
+      if (seconds < 59) {
+        return createdTime.toISOString().substring(19, 17)
+      } else if (seconds < 3599) {
+        return createdTime.toISOString().substring(19, 14)
+      } else {
+        return createdTime.toISOString().substring(19, 11)
+      }
       // время перегоняется в строку и вырезается лишнее
-      let fullTime = createdTime.toISOString().substring(19, 11)
+      // let fullTime = createdTime.toISOString().substring(19, 11)
       // console.log(fullTime)
-      return fullTime
+      // return fullTime
     },
   }
 }
