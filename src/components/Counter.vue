@@ -3,7 +3,7 @@
 
   <div class="stopwatch">
     <div class="timerBlock">{{ formattedTime }}</div>
-    <div>
+    <div class="btnBlock">
       <button v-on:click="pauseTimer(), showStart()" v-if="!show" class="btnStyleNone">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" fill="currentColor" class="bi bi-pause"
              viewBox="0 0 16 16">
@@ -72,6 +72,7 @@ export default {
       this.timer = setInterval(() => {
         this.currentTime++
         this.formattedTime = this.formatTime(this.currentTime)
+        // здесь можно ускорить отсчет для проверки отображения минут и часов
       }, 1000)
     },
     formatTime(seconds) {
@@ -96,7 +97,7 @@ export default {
 
 <style>
 .stopwatch {
-  width: 255px;
+  width: 225px;
   height: 120px;
   background-color: #696969;
   color: #9E9E9E;
@@ -109,6 +110,7 @@ export default {
   color: inherit;
   background-color: transparent;
   cursor: pointer;
+
 }
 
 .timerBlock {
@@ -121,5 +123,13 @@ export default {
   margin: 0 auto;
   padding: 22px;
   border-bottom: 1px solid #9E9E9E;
+}
+
+.btnBlock{
+  padding: 20px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  gap: 50px;
 }
 </style>
