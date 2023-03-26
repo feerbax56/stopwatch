@@ -4,9 +4,9 @@
   <div class="stopwatch">
     <div>{{ formattedTime }}</div>
     <div>
-      <button v-on:click="startTimer" :disabled="timerState === 'running'">start</button>
-      <button v-on:click="pauseTimer">pause</button>
-      <button v-on:click="stopTimer" :disabled="timerState === 'stopped'">stop</button>
+      <button v-on:click="pauseTimer(), showStart()" v-if="!show">pause</button>
+      <button v-on:click="startTimer(), showPaused()" v-if="show" class="btnStart">start</button>
+      <button v-on:click="stopTimer(),  showStart()" :disabled="timerState === 'stopped'">stop</button>
     </div>
   </div>
 </template>
@@ -21,6 +21,7 @@ export default {
       formattedTime: "0",
       timerState: 'stopped',
       timer: undefined,
+      show: true
     }
   },
   methods: {
@@ -33,6 +34,12 @@ export default {
     pauseTimer() {
       this.timerState = 'paused'
       window.clearInterval(this.timer)
+    },
+    showStart() {
+      this.show = true
+    },
+    showPaused() {
+      this.show = false
     },
     stopTimer() {
       window.clearInterval(this.timer)
@@ -74,4 +81,7 @@ export default {
   color: #9E9E9E;
 }
 
+.btnStart {
+  background-image: url("../src/assets/icons/play.svg");
+}
 </style>
